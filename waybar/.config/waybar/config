@@ -10,7 +10,7 @@
 
     "modules-left": [ "hyprland/workspaces" ], 
     "modules-center": [ "clock" ],
-    "modules-right": [ "pulseaudio", "bluetooth", "network", "fcitx5","tray" ],
+    "modules-right": [ "pulseaudio", "bluetooth", "network", "custom/monitor","tray","custom/power"],
 
     "hyprland/workspaces": {
         "format": "{id}",
@@ -49,12 +49,22 @@
     },
 
     "network": {
-    "format-wifi": " {essid} ({signalStrength}%)",
-    "format-ethernet": "󰈀  Ethernet",
-    "format-disconnected": "⚠ Disconnected",
-    "on-click": "kitty -e nmtui"
-},
-
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "󰈀  Ethernet",
+        "format-disconnected": "⚠ Disconnected",
+        "on-click": "kitty -e nmtui"
+    },
+    "custom/monitor": {
+        "format": "🖥️",
+        // 直接 wdisplays を起動します
+        "on-click": "wdisplays",
+        "tooltip": false
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "~/.local/bin/power-menu",
+        "tooltip": false
+    },
     "tray": {
         "icon-size": 18,
         "spacing": 10

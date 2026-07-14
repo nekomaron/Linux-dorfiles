@@ -1,0 +1,15 @@
+#!/bin/bash
+
+options="🚪 Logout\n💤 Suspend"
+
+chosen=$(echo -e "$options" | wofi --dmenu --width 150 --height 100 --location cursor --hide-scroll --prompt "Power:")
+
+case "$chosen" in
+    "🚪 Logout")
+        # Luaのラッパーと喧嘩しないよう、メインプロセスに直接終了シグナルを送る
+        killall Hyprland
+        ;;
+    "💤 Suspend")
+        systemctl suspend
+        ;;
+esac

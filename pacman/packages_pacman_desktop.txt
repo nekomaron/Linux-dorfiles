@@ -6,6 +6,7 @@ efibootmgr
 fcitx5-gtk
 fuzzel
 grim
+hypridle
 hyprland
 hyprpaper
 intel-ucode
@@ -21,6 +22,9 @@ sof-firmware
 stow
 system-config-printer
 waybar
+wdisplays
 wiremix
 wl-clipboard
+wlr-randr
+wofi
 zram-generator

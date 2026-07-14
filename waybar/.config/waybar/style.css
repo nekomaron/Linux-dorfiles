@@ -56,3 +56,13 @@ window#waybar {
     color: #f38ba8; /* 切断時は赤 */
 }
 
+#custom-power {
+    color: #94e2d5;          /* 落ち着いたミントグリーン */
+    background: transparent;
+    padding: 0 10px;
+    font-size: 16px;
+}
+
+#custom-power:hover {
+    color: #89dceb;          /* ホバーすると爽やかなライトシアンに */
+}
