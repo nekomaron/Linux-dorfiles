@@ -1,0 +1,6 @@
+floorp-bin
+ttf-hackgen
+ttf-udev-gothic
+wlogout
+yay
+yay-debug

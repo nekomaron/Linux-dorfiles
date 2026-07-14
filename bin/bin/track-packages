@@ -1,0 +1,84 @@
+#!/bin/bash
+
+#chmod +x ~/.dotfiles/bin/bin/track-packages 
+#を一回実行すること
+
+# エラーハンドリングとパスの自動解決
+set -e
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+TARGET_DIR="$DOTFILES_DIR/pacman"
+
+mkdir -p "$TARGET_DIR"
+
+ENV_TYPE=""
+
+# 引数の処理
+case "$1" in
+    -desktop)
+        ENV_TYPE="desktop"
+        ;;
+    -laptop)
+        ENV_TYPE="laptop"
+        ;;
+    "")
+        # 引数がない場合は対話モード
+        echo "❓ どの環境のパッケージリストを保存しますか？"
+        select opt in "desktop" "laptop" "キャンセル"; do
+            case $opt in
+                "desktop")
+                    ENV_TYPE="desktop"
+                    break
+                    ;;
+                "laptop")
+                    ENV_TYPE="laptop"
+                    break
+                    ;;
+                "キャンセル")
+                    echo "❌ 中止しました。"
+                    exit 0
+                    ;;
+                *)
+                    echo "1 または 2 を選択してください。"
+                    ;;
+            esac
+        done
+        ;;
+    *)
+        echo "❌ エラー: 不正な引数です。使用方法: track-packages [-desktop|-laptop]"
+        exit 1
+        ;;
+esac
+
+# ファイル名の決定
+PACMAN_FILE="$TARGET_DIR/packages_pacman_${ENV_TYPE}.txt"
+AUR_FILE="$TARGET_DIR/packages_aur_${ENV_TYPE}.txt"
+
+# 上書き確認の関数
+check_overwrite() {
+    local file=$1
+    if [ -f "$file" ]; then
+        echo -n "⚠️  $(basename "$file") は既に存在します。上書きしますか？ (y/N): "
+        read -r ans
+        if [[ ! "$ans" =~ ^[Yy]$ ]]; then
+            echo "🛑 中止しました。"
+            exit 0
+        fi
+    fi
+}
+
+# 両方のファイルについて上書き確認を行う
+if [ -f "$PACMAN_FILE" ] || [ -f "$AUR_FILE" ]; then
+    check_overwrite "$PACMAN_FILE"
+fi
+
+echo "📦 ${ENV_TYPE} 環境の明示的インストールパッケージを抽出中..."
+
+# 1. Pacman (公式レポジトリ) から明示的に入れたネイティブパッケージ一覧
+pacman -Qent | awk '{print $1}' > "$PACMAN_FILE"
+
+# 2. AUR から明示的に入れた外来パッケージ一覧
+pacman -Qem | awk '{print $1}' > "$AUR_FILE"
+
+echo "✨ 完了しました！"
+echo "  📄 $PACMAN_FILE"
+echo "  📄 $AUR_FILE"

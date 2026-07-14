@@ -42,5 +42,20 @@
     '';
   }; 
 
+programs.bash = {
+  enable = true;
+  
+  # .bashrc の末尾に直接、一番見慣れた形でパスとエイリアスを書き加えます
+  initExtra = ''
+    # 自作スクリプトがあるディレクトリにパスを通す
+    export PATH="$HOME/.dotfiles/bin/bin:$PATH"
+  '';
+
+  shellAliases = {
+    # pkgs という短縮エイリアスを設定
+    pkgs = "track-packages";
+  };
+};
+
   programs.home-manager.enable = true;
 }
