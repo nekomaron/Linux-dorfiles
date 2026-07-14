@@ -42,20 +42,18 @@
     },
     
     "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {device_alias}",
-        "on-click": "blueman-manager",
-        "on-click-right": "rfkill toggle bluetooth",
-        "tooltip-format": "{num_connections} connected"
+    "format": " {status}",
+    "format-connected": " {device_alias}", 
+    "on-click": "kitty --class float-term -e bluetuith",
+    "tooltip-format": "{controller_alias}\t{controller_address}"
     },
 
     "network": {
-        "interface": "en*",
-        "interval": 1,
- 	"format-ethernet": "󰈀 {ifname}", // "format-ethernet": "󰈀 {ifname}  {bandwidthDownBits}  {bandwidthUpBits}",
-        "format-disconnected": "󰖪 Disconnected",
-        "max-length": 25
-    },
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "󰈀  Ethernet",
+    "format-disconnected": "⚠ Disconnected",
+    "on-click": "kitty -e nmtui"
+},
 
     "tray": {
         "icon-size": 18,

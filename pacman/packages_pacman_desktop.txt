@@ -1,5 +1,4 @@
 base
-blueman
 bluez-utils
 cups
 dolphin
@@ -14,7 +13,6 @@ kitty
 mako
 nvidia-open
 ouch
-pavucontrol
 plasma-desktop
 sddm
 slurp
