@@ -1,0 +1,58 @@
+* {
+    font-family: "Symbols Nerd Font", "UDEV Gothic NF", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+.modules-left, .modules-center, .modules-right {
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: rgba(30, 30, 46, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#workspaces button {
+    margin: 0px 4px;
+    padding: 0px 8px;
+    border-radius: 100px;
+    color: #cdd6f4;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border: none;
+}
+
+#workspaces button.active {
+    color: #11111b;
+    background-color: #33ccff;
+    min-width: 35px;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    box-shadow: none;
+}
+
+#clock, #pulseaudio, #bluetooth, #network, #tray {
+    color: #cdd6f4;
+    margin: 0 6px;
+}
+
+#bluetooth.connected {
+    color: #89b4fa;
+}
+
+#network {
+    color: #89dceb; /* CatppuccinのSkyブルー（有線LAN用） */
+    margin: 0 6px;
+}
+
+#network.disconnected {
+    color: #f38ba8; /* 切断時は赤 */
+}
+

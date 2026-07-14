@@ -1,0 +1,18 @@
+max-visible=3
+output=graphical
+font=HackGen35Nerd 10
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#89b4fa
+border-size=2
+border-radius=5
+default-timeout=5000
+
+[app-name="bluedevil"]
+invisible=1
+
+[summary~="Bluetooth"]
+invisible=1
+
+[summary~="切断"]
+invisible=1

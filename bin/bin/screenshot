@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SAVE_DIR="$HOME/Pictures/Screenshots"
+mkdir -p "$SAVE_DIR"
+FILE_NAME="$SAVE_DIR/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+# 引数によって挙動を変える
+if [ "$1" = "full" ]; then
+    # 画面全体をキャプチャ (Meta+Shift+3 用)
+    grim "$FILE_NAME" && wl-copy < "$FILE_NAME"
+else
+    # 領域を選択してキャプチャ (Meta+Shift+4 用、デフォルト)
+    slurp | grim -g - - | tee "$FILE_NAME" | wl-copy
+fi
+
+notify-send -t 1000 "Screenshot Captured" "Saved to $FILE_NAME" -i "$FILE_NAME"

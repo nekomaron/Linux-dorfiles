@@ -1,0 +1,11 @@
+bluetuith-bin
+bluetuith-bin-debug
+fcitx5-mozc-ut
+fcitx5-mozc-ut-debug
+floorp-bin
+mozc
+mozc-debug
+ttf-cica
+ttf-hackgen
+yay
+yay-debug
