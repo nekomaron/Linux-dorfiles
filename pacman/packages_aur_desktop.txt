@@ -1,3 +1,5 @@
+bluetuith-bin
+fcitx5-mozc-ut
 floorp-bin
 ttf-hackgen
 ttf-udev-gothic
