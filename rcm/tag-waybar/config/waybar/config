@@ -60,11 +60,6 @@
         "on-click": "wdisplays",
         "tooltip": false
     },
-    "custom/power": {
-        "format": "⏻",
-        "on-click": "~/.local/bin/power-menu",
-        "tooltip": false
-    },
     "tray": {
         "icon-size": 18,
         "spacing": 10

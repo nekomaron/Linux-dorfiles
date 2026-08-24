@@ -18,7 +18,7 @@
       homeConfigurations."kyosuke" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        modules = [ ./home-manager/home.nix ];
+        modules = [ ./home.nix ];
       };
     };
 }
