@@ -23,6 +23,7 @@
       enable = true;
       initContent = ''
         PS1='%m %1~ %# '
+        export ACONFMGR_CONFIG="$HOME/.dotfiles/aconfmgr"
       '';
   };
 
