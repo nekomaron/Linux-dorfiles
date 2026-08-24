@@ -1,7 +1,0 @@
-bluetuith-bin
-fcitx5-mozc-ut
-floorp-bin
-ttf-cica
-ttf-hackgen
-yay
-yay-debug

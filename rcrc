@@ -1,0 +1,2 @@
+DOTFILES_DIRS="$HOME/.dotfiles/rcm"
+TAGS="waybar kitty hypr mako wireplumber"
