@@ -13,20 +13,6 @@
         state: present
         update_cache: true
 
-    - name: yay がインストールされているか確認
-      command: which yay
-      register: yay_check
-      changed_when: false
-      failed_when: false
-
-    - name: AUR パッケージをインストール
-      become: false
-      command: yay -S --needed --noconfirm {{ item }}
-      loop: "{{ aur_packages }}"
-      when: yay_check.rc == 0
-      register: aur_result
-      changed_when: "'nothing to do' not in aur_result.stdout"
-
     - name: 明示的に不要と判断したパッケージを削除
       become: true
       community.general.pacman:
@@ -60,3 +46,25 @@
       systemd:
         name: sddm
         enabled: true
+
+    - name: インストール済みパッケージ一覧を取得
+      command: pacman -Qq
+      register: installed_packages
+      changed_when: false
+
+    - name: 不足しているAURパッケージを特定
+      set_fact:
+        missing_aur_packages: "{{ aur_packages | difference(installed_packages.stdout_lines) }}"
+
+    - name: 不足しているAURパッケージがあれば実行コマンドを提示
+      debug:
+        msg: |
+          以下のAURパッケージが不足しています。手動で実行してください:
+
+          yay -S --needed {{ missing_aur_packages | join(' ') }}
+      when: missing_aur_packages | length > 0
+
+    - name: AURパッケージはすべて揃っています
+      debug:
+        msg: "AURパッケージはすべてインストール済みです。"
+      when: missing_aur_packages | length == 0
