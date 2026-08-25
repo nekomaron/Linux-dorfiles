@@ -21,10 +21,8 @@ ansible-playbook -i inventory.ini playbook.yml --check --diff --ask-become-pass
 
 # How to use rcm
 rcm allows you to manage configuration files stored in your dotfiles.
-To use it, you first need to install rcm:
-```bash
-sudo pacman -S rcm
-```
+You should have completed the installation using Ansible. If not, please do so from there.
+
 After installation, place your configuration files directly in HOME:
 ```bash
 cp ~/.dotfiles/rcrc ~/.rcrc
