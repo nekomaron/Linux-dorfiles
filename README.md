@@ -1,32 +1,22 @@
-# パソコンシステム全般設定
-
-## TUI Toolについて
-使用しているTUI(Text User Interface)ツールについてまとめた
-### 📶bluetuith
-GUIを用いずに ターミナル上でBluetoothデバイスのペアリングや接続切り替えを完結させるツール
-
-起動方法　``bluetuith`` 
+This repository contains nekomaron's dotfiles.
  
- - 主な操作方法
-    - 矢印キー（↑ / ↓） または k / j: デバイスリストの移動
-    - Enter: 選択したデバイスに接続 / 切断
-    - p: ペアリングを開始
-    - t: 信頼（Trust）するデバイスとしてマーク
-    - s: 新しいデバイスのスキャン（探索）を開始 / 停止
-    - Esc または q: ツールを終了
+First, after cloning this repository, modify the files in HOME/.dotfiles.
 
-### 🔊wiremix
-PipeWire環境のオーディオ入力・出力を直感的にコントロールする、軽量なオーディオミキサー
-
-起動方法　``wiremix``
-
- - 主な操作方法:
-    - 矢印キー（← / →） または h / l: コントロール（音量スライダーやデバイス）の選択切り替え
-    - 矢印キー（↑ / ↓） または k / j: 選択しているデバイスの音量調節（上下）
-    - m: ミュート（消音）の切り替え
-    - q または Ctrl + C: ツールを終了
-
-### 🔌nmtui
-ネットワークマネージャー
-起動方法　``nmtui``
- 
+# How to use rcm
+rcm allows you to manage configuration files stored in your dotfiles.
+To use it, you first need to install rcm:
+```bash
+sudo pacman -S rcm
+```
+After installation, place your configuration files directly in HOME:
+```bash
+cp ~/.dotfiles/rcrc ~/.rcrc
+```
+Then apply the changes:
+```bash
+rcup
+```
+Alternatively, if you want to apply only specific files, use the following command:
+```bash
+rcdn -t kitty
+```

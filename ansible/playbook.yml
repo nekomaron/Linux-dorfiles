@@ -1,0 +1,62 @@
+- hosts: localhost
+  connection: local
+  vars_files:
+    - vars/packages-native.yml
+    - vars/packages-aur.yml
+    - vars/packages-removed.yml
+
+  tasks:
+    - name: 公式リポジトリのパッケージをインストール
+      become: true
+      community.general.pacman:
+        name: "{{ native_packages }}"
+        state: present
+        update_cache: true
+
+    - name: yay がインストールされているか確認
+      command: which yay
+      register: yay_check
+      changed_when: false
+      failed_when: false
+
+    - name: AUR パッケージをインストール
+      become: false
+      command: yay -S --needed --noconfirm {{ item }}
+      loop: "{{ aur_packages }}"
+      when: yay_check.rc == 0
+      register: aur_result
+      changed_when: "'nothing to do' not in aur_result.stdout"
+
+    - name: 明示的に不要と判断したパッケージを削除
+      become: true
+      community.general.pacman:
+        name: "{{ removed_packages }}"
+        state: absent
+      when: removed_packages | length > 0
+
+    - name: 孤児パッケージを取得
+      become: true
+      shell: pacman -Qtdq || true
+      register: orphans
+      changed_when: false
+
+    - name: 孤児パッケージを削除
+      become: true
+      command: pacman -Rns --noconfirm {{ orphans.stdout_lines | join(' ') }}
+      when: orphans.stdout_lines | length > 0
+
+    - name: NetworkManager, bluetooth を有効化して起動
+      become: true
+      systemd:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+      loop:
+        - NetworkManager
+        - bluetooth
+
+    - name: sddm を有効化
+      become: true
+      systemd:
+        name: sddm
+        enabled: true

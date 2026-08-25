@@ -1,0 +1,6 @@
+aur_packages:
+  - bluetuith-bin
+  - fcitx5-mozc-ut
+  - ttf-hackgen
+  - ttf-udev-gothic
+  - wlogout
