@@ -4,3 +4,4 @@ aur_packages:
   - ttf-hackgen
   - ttf-udev-gothic
   - wlogout
+  - rcm
